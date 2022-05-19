@@ -36,6 +36,9 @@ gem "bootsnap", require: false
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem "rack-cors"
 
+# A library for generating fake data such as names, addresses, and phone numbers.
+gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]

@@ -5,3 +5,13 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+puts "Registering dishs..."
+50.times do
+	Post.create!(
+		title: Faker::Food.dish,
+		content: Faker::Food.description
+	) 
+end
+
+puts "Dishs Registered successfully."
