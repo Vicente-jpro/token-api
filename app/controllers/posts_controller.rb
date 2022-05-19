@@ -1,5 +1,9 @@
 class PostsController < ApplicationController
+
+  before_action :authenticate # except: [ :index ]
   before_action :set_post, only: %i[ show update destroy ]
+
+  include ActionController::HttpAuthentication::Token::ControllerMethods
 
   # GET /posts
   def index
@@ -48,4 +52,16 @@ class PostsController < ApplicationController
     def post_params
       params.require(:post).permit(:title, :content)
     end
+
+    def authenticate
+      authenticate_or_request_with_http_token do |token, options|
+        # Compare the tokens in a time-constant manner, to mitigate
+        # timing attacks.
+        #ActiveSupport::SecurityUtils.secure_compare(token, TOKEN)
+        hmac_secret = 'my$ecretK3y'
+        JWT.decode token, hmac_secret, true, { algorithm: 'HS256' }
+
+      end
+    end
+
 end
